@@ -7,7 +7,7 @@ endfunction
 a=3
 b=4
 
-for i=1:30
+for i=1:50
     m=(a+b)/2
     if(f(a)*f(m) < 0) then
         b=m
