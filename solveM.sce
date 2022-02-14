@@ -1,3 +1,5 @@
+// upper triangular matrix solution
+
 function [x]=solveM(M,b)
     n=size(M,1)
     
