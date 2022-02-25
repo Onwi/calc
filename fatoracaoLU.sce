@@ -1,3 +1,22 @@
+//matriz triangular superior
+function [x]=solveU(U,b)
+    n=size(U,1)
+    
+    x(n) = b(n)/U(n,n)
+    for i=n-1:-1:1
+        x(i) = (b(i)-U(i, i+1:n) * x(i+1:n))/U(i,i)
+    end
+endfunction
+
+//matriz triangular inferior
+function [x]=solveL(L,b)
+    n=size(L,1)
+    x(1)=b(1)/L(1,1)
+    for i=2:n
+        x(i)=(b(i)-L(i,1:i-1)*x(1:i-1))/L(i,i)
+    end
+endfunction
+
 function [L ,A]= fatoraLU(A)
     n= size(A,1)
     L= eye(n,n)
@@ -9,4 +28,10 @@ function [L ,A]= fatoraLU(A)
             A(i, j)=0
         end
     end
+endfunction
+
+function [x]=resolve(A,b)
+    [L,U]=fatoraLU(A)
+    y = solveL(L,b)
+    x = solveU(U,y)
 endfunction
